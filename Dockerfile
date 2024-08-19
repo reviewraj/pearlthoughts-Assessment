@@ -16,7 +16,7 @@ FROM node:18
 
 WORKDIR /app
 
-COPY --from=build /app/dist/pt-notification-service /app/dist/pt-notification-service
+COPY --from=build /app/dist/apps/pt-notification-service /app/dist/apps/pt-notification-service
 
 ENV NODE_ENV=production
 
