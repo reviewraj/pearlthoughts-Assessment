@@ -60,8 +60,8 @@ jobs:
 
     - name: Push Docker images
       run: |
-        docker tag pt-notification-service:latest your-dockerhub-username/pt-notification-service:latest
-        docker tag email-sender:latest your-dockerhub-username/email-sender:latest
+        docker tag pt-notification-service:latest ${{ secrets.DOCKER_USERNAME }}/pt-notification-service:latest
+        docker tag email-sender:latest ${{ secrets.DOCKER_USERNAME }}/email-sender:latest
         docker push your-dockerhub-username/pt-notification-service:latest
         docker push your-dockerhub-username/email-sender:latest
 
