@@ -50,24 +50,25 @@ jobs:
     - name: Build pt-notification-service
       run: npx nx build pt-notification-service
 
-    - name: Build email-sender
-      run: npx nx build email-sender
-
     - name: Build Docker images
       run: |
         docker build -t pt-notification-service:latest -f  .
-        docker build -t email-sender:latest -f  .
 
     - name: Push Docker images
       run: |
         docker tag pt-notification-service:latest ${{ secrets.DOCKER_USERNAME }}/pt-notification-service:latest
-        docker tag email-sender:latest ${{ secrets.DOCKER_USERNAME }}/email-sender:latest
-        docker push your-dockerhub-username/pt-notification-service:latest
-        docker push your-dockerhub-username/email-sender:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/pt-notification-service:latest
+      
 
-    - name: Deploy to AWS ECS
+    - name: Deploy to  notfication_api
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        cluster: your-cluster-name
-        service: your-service-name
-        task-definition: your-task-definition
+        cluster: pearl_thoughts
+        service: notification-api-service
+        task-definition: notification_api_task
+    - name: Deploy to email sender
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        cluster: pearl_thoughts
+        service: email_sender_service
+        task-definition: email_sender_task
