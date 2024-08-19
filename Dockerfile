@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN npx nx reset
+
 RUN npx nx build pt-notification-service
 
 FROM node:18
