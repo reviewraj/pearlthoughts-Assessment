@@ -52,7 +52,7 @@ jobs:
 
     - name: Build Docker images
       run: |
-        docker build -t pt-notification-service:latest -f  .
+        docker build -t pt-notification-service:latest  .
 
     - name: Push Docker images
       run: |
